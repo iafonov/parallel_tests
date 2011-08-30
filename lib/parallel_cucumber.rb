@@ -4,7 +4,7 @@ class ParallelCucumber < ParallelTests
   def self.run_tests(test_files, process_number, options)
     color = ($stdout.tty? ? 'AUTOTEST=1 ; export AUTOTEST ;' : '')#display color when we are in a terminal
     runtime_logging = " --format ParallelCucumber::RuntimeLogger --out #{runtime_log}"
-    cmd = "#{color} #{executable}"
+    cmd = "#{color} #{executable} -r features/"
     cmd << runtime_logging if File.directory?(File.dirname(runtime_log))
     cmd << " #{options[:test_options]} #{test_files*' '}"
     execute_command(cmd, process_number, options)
